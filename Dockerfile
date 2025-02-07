@@ -1,6 +1,6 @@
 FROM eclipse-temurin:17-jre-alpine
 
-COPY ./target/chuck-facts-1.0-SNAPSHOT.jar .
+COPY ./target/reza-1.0-SNAPSHOT.jar .
 
 EXPOSE 8080
 
