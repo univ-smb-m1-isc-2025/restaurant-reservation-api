@@ -5,6 +5,7 @@ import m1.info.reza.auth.DTO.RegisterUserDto;
 import m1.info.reza.user.User;
 import m1.info.reza.user.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -43,13 +44,17 @@ public class AuthService {
     }
 
     public User authenticate(LoginUserDto input) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(input.getEmail(), input.getPassword())
-        );
-
         User user = userRepository.findByEmail(input.getEmail())
-                .orElseThrow(() -> new RuntimeException("E-mail ou mot de passe invalide."));
+                .orElseThrow(() -> new BadCredentialsException("E-mail ou mot de passe invalide."));
 
-        return new AuthResponseDto(user.getEmail(), "Authentication successful");
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(input.getEmail(), input.getPassword())
+            );
+        } catch (BadCredentialsException  e) {
+            throw new BadCredentialsException("E-mail ou mot de passe invalide.");
+        }
+
+        return user;
     }
 }
