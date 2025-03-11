@@ -28,22 +28,28 @@ public class AuthService {
     }
 
     public User signup(RegisterUserDto input) {
-        User user = new User();
-        user.setEmail(input.getEmail());
-        user.setPassword(passwordEncoder.encode(input.getPassword()));
+        if (userRepository.existsByEmail(input.getEmail())) {
+            throw new RuntimeException("Cet e-mail est déjà utilisé.");
+        }
+
+        User user = new User(
+            input.getEmail(),
+            passwordEncoder.encode(input.getPassword()),
+            input.getFirstName(),
+            input.getLastName()
+        );
 
         return userRepository.save(user);
     }
 
     public User authenticate(LoginUserDto input) {
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        input.getEmail(),
-                        input.getPassword()
-                )
+                new UsernamePasswordAuthenticationToken(input.getEmail(), input.getPassword())
         );
 
-        return userRepository.findByEmail(input.getEmail())
-                .orElseThrow();
+        User user = userRepository.findByEmail(input.getEmail())
+                .orElseThrow(() -> new RuntimeException("E-mail ou mot de passe invalide."));
+
+        return new AuthResponseDto(user.getEmail(), "Authentication successful");
     }
 }
