@@ -1,6 +1,7 @@
 package m1.info.reza.user;
 
 import jakarta.persistence.*;
+import m1.info.reza.staff.RestaurantStaff;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -29,6 +31,9 @@ public class User implements UserDetails {
 
     @Column(name="last_name")
     private String lastName;
+
+    @OneToMany(mappedBy = "user")
+    private Set<RestaurantStaff> workingRestaurants;
 
     @CreationTimestamp
     @Column(updatable = false, name = "created_at")
