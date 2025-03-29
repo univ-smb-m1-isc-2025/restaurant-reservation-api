@@ -14,7 +14,8 @@ public class WebConfig implements WebMvcConfigurer {
     public CorsFilter corsFilter() {
         // Créer une configuration CORS
         CorsConfiguration corsConfig = new CorsConfiguration();
-        corsConfig.addAllowedOrigin("http://localhost:4200"); // L'origine de votre frontend Angular
+        corsConfig.addAllowedOrigin("http://localhost:4200");
+        corsConfig.addAllowedOrigin("http://www.reza.oups.net");
         corsConfig.addAllowedMethod("GET");
         corsConfig.addAllowedMethod("POST");
         corsConfig.addAllowedMethod("PUT");
