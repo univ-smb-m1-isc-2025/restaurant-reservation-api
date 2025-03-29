@@ -17,13 +17,21 @@ public class RestaurantStaff {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
-
-    @ManyToOne
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
+
+    public RestaurantStaff() {
+    }
+
+    public RestaurantStaff(User user, Restaurant restaurant, Role role) {
+        this.user = user;
+        this.restaurant = restaurant;
+        this.role = role;
+    }
 
     public Long getId() {
         return id;
