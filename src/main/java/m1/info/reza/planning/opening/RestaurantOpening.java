@@ -1,7 +1,7 @@
-package m1.info.reza.planning;
+package m1.info.reza.planning.opening;
 
 import jakarta.persistence.*;
-import m1.info.reza.planning.day.DayOfWeek;
+import m1.info.reza.planning.days.DayOfWeek;
 import m1.info.reza.restaurant.Restaurant;
 
 import java.time.LocalTime;

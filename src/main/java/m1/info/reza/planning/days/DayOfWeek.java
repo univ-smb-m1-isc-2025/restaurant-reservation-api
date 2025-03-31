@@ -1,4 +1,4 @@
-package m1.info.reza.planning.day;
+package m1.info.reza.planning.days;
 
 public enum DayOfWeek {
     MONDAY,
