@@ -1,5 +1,10 @@
 package m1.info.reza.restaurant.DTO;
 
+import m1.info.reza.planning.RestaurantOpening;
+import m1.info.reza.restaurant.Restaurant;
+
+import java.util.List;
+
 public class RestaurantDTO {
 
     private Long id;
@@ -8,15 +13,27 @@ public class RestaurantDTO {
     private String city;
     private String zipcode;
     private int capacity;
+    private List<RestaurantOpening> openings;
 
     // Constructeur, Getters et Setters
-    public RestaurantDTO(Long id, String name, String address, String city, String zipcode, int capacity) {
+    public RestaurantDTO(Long id, String name, String address, String city, String zipcode, int capacity, List<RestaurantOpening> restaurantOpenings) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.city = city;
         this.zipcode = zipcode;
         this.capacity = capacity;
+        this.openings = restaurantOpenings;
+    }
+
+    public RestaurantDTO(Restaurant restaurant) {
+        this.id = restaurant.getId();
+        this.name = restaurant.getName();
+        this.address = restaurant.getAddress();
+        this.city = restaurant.getCity();
+        this.zipcode = restaurant.getZipcode();
+        this.capacity = restaurant.getCapacity();
+        this.openings = restaurant.getOpenings();
     }
 
     // Getters et Setters
@@ -66,5 +83,9 @@ public class RestaurantDTO {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    public List<RestaurantOpening> getOpenings() {
+        return openings;
     }
 }

@@ -1,5 +1,6 @@
 package m1.info.reza.exception;
 
+import m1.info.reza.exception.custom.UnauthorizedAccessException;
 import m1.info.reza.response.ApiResponse;
 import m1.info.reza.response.ResponseUtil;
 import org.springframework.http.HttpHeaders;
@@ -27,9 +28,17 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
     }
 
+    @ExceptionHandler(UnauthorizedAccessException.class)
+    public ResponseEntity<ApiResponse<String>> handleUnauthorizedAccessException(UnauthorizedAccessException ex) {
+        ApiResponse<String> response = ResponseUtil.error(ex.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<String>> handleGeneralException(Exception ex) {
         ApiResponse<String> response = ResponseUtil.error(ex.getMessage());
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+
 }

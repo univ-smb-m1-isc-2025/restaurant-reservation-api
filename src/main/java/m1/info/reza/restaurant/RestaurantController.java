@@ -59,7 +59,8 @@ public class RestaurantController {
                                 staff.getRestaurant().getAddress(),
                                 staff.getRestaurant().getCity(),
                                 staff.getRestaurant().getZipcode(),
-                                staff.getRestaurant().getCapacity()
+                                staff.getRestaurant().getCapacity(),
+                                staff.getRestaurant().getOpenings()
                         ),
                         new RoleDTO(
                                 staff.getRole().getId(),

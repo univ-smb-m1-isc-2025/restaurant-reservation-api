@@ -1,5 +1,6 @@
 package m1.info.reza.planning;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import m1.info.reza.planning.day.DayOfWeek;
 import m1.info.reza.restaurant.Restaurant;
@@ -15,6 +16,7 @@ public class RestaurantOpening {
 
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
+    @JsonBackReference
     private Restaurant restaurant;
 
     @Enumerated(EnumType.STRING)

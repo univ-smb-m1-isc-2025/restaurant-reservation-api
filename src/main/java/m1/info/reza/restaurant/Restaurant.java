@@ -1,9 +1,12 @@
 package m1.info.reza.restaurant;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import m1.info.reza.planning.RestaurantOpening;
 import m1.info.reza.staff.RestaurantStaff;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Restaurant {
@@ -18,7 +21,8 @@ public class Restaurant {
     private int capacity;
 
     @OneToMany(mappedBy = "restaurant")
-    private Set<RestaurantStaff> restaurantStaffs;
+    @JsonManagedReference
+    private List<RestaurantOpening> openings;
 
     public Restaurant() {
     }
@@ -29,6 +33,7 @@ public class Restaurant {
         this.city = city;
         this.zipcode = zipcode;
         this.capacity = capacity;
+        this.openings = new ArrayList<>();
     }
 
     public Long getId() {
@@ -73,5 +78,9 @@ public class Restaurant {
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
+    }
+
+    public List<RestaurantOpening> getOpenings() {
+        return openings;
     }
 }
