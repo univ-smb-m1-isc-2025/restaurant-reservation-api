@@ -11,7 +11,7 @@ import java.time.LocalTime;
 public class RestaurantOpening {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
