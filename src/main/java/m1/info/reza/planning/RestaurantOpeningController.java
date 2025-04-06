@@ -26,7 +26,7 @@ public class RestaurantOpeningController {
         this.authenticatedUserService = authenticatedUserService;
     }
 
-    @PostMapping("/add")
+    @PostMapping("/create")
     public ResponseEntity<ApiResponse<RestaurantDTO>> addOpeningHours(@PathVariable Long id, @Valid @RequestBody List<OpeningHoursRequest> openings) {
         authenticatedUserService.checkAuthenticatedUserRoleManagerOrHigher(id);
 
