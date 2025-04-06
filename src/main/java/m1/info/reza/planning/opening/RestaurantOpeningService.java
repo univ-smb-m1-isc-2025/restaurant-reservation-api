@@ -1,4 +1,4 @@
-package m1.info.reza.planning;
+package m1.info.reza.planning.opening;
 
 import jakarta.persistence.EntityNotFoundException;
 import m1.info.reza.planning.DTO.OpeningHoursRequest;

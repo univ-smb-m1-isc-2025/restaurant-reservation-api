@@ -2,7 +2,7 @@ package m1.info.reza.planning.closure;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import m1.info.reza.planning.RestaurantOpening;
+import m1.info.reza.planning.opening.RestaurantOpening;
 
 import java.time.LocalDate;
 
