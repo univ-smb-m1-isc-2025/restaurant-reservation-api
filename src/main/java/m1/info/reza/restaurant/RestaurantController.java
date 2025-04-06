@@ -70,7 +70,7 @@ public class RestaurantController {
                 .toList();
 
         ApiResponse<List<RestaurantWithRoleDTO>> response = ResponseUtil.success("La liste des restaurants a été trouvée avec succès.", restaurantWithRoleDTOS);
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 }
