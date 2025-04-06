@@ -2,7 +2,7 @@ package m1.info.reza.restaurant;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import m1.info.reza.planning.RestaurantOpening;
+import m1.info.reza.planning.opening.RestaurantOpening;
 import m1.info.reza.staff.RestaurantStaff;
 
 import java.util.ArrayList;

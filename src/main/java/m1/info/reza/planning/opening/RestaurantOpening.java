@@ -1,4 +1,4 @@
-package m1.info.reza.planning;
+package m1.info.reza.planning.opening;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;

@@ -1,7 +1,7 @@
 package m1.info.reza.restaurant.DTO;
 
-import m1.info.reza.planning.RestaurantOpening;
 import m1.info.reza.planning.closure.RestaurantClosure;
+import m1.info.reza.planning.opening.RestaurantOpening;
 import m1.info.reza.restaurant.Restaurant;
 
 import java.util.List;

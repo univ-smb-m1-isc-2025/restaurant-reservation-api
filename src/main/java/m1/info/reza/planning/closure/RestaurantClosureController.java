@@ -2,8 +2,8 @@ package m1.info.reza.planning.closure;
 
 import jakarta.validation.Valid;
 import m1.info.reza.auth.AuthenticatedUserService;
-import m1.info.reza.planning.RestaurantOpening;
-import m1.info.reza.planning.RestaurantOpeningService;
+import m1.info.reza.planning.opening.RestaurantOpening;
+import m1.info.reza.planning.opening.RestaurantOpeningService;
 import m1.info.reza.planning.closure.DTO.ClosureCreateRequest;
 import m1.info.reza.response.ApiResponse;
 import m1.info.reza.response.ResponseUtil;

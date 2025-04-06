@@ -3,7 +3,7 @@ package m1.info.reza.planning.closure;
 import jakarta.persistence.EntityExistsException;
 import m1.info.reza.exception.custom.BadRequestException;
 
-import m1.info.reza.planning.RestaurantOpening;
+import m1.info.reza.planning.opening.RestaurantOpening;
 import m1.info.reza.planning.closure.DTO.ClosureCreateRequest;
 import m1.info.reza.restaurant.Restaurant;
 import org.springframework.stereotype.Service;
