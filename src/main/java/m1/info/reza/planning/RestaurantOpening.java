@@ -1,11 +1,15 @@
 package m1.info.reza.planning;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import m1.info.reza.planning.day.DayOfWeek;
+import m1.info.reza.planning.closure.RestaurantClosure;
 import m1.info.reza.restaurant.Restaurant;
 
+import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class RestaurantOpening {
@@ -23,6 +27,10 @@ public class RestaurantOpening {
     private DayOfWeek day;
     private LocalTime openingTime;
     private LocalTime closingTime;
+
+    @OneToMany(mappedBy = "opening")
+    @JsonManagedReference
+    private List<RestaurantClosure> closures;
 
 
     public RestaurantOpening() {
@@ -73,5 +81,13 @@ public class RestaurantOpening {
 
     public void setClosingTime(LocalTime closingTime) {
         this.closingTime = closingTime;
+    }
+
+    public List<RestaurantClosure> getClosures() {
+        return closures;
+    }
+
+    public void setClosures(List<RestaurantClosure> closures) {
+        this.closures = closures;
     }
 }

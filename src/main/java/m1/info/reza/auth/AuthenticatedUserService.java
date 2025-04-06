@@ -28,9 +28,11 @@ public class AuthenticatedUserService {
         return null; // Aucun utilisateur connecté
     }
 
-    public void checkAuthenticatedUserRoleManagerOrHiger(Long restaurantId){
+    public void checkAuthenticatedUserRoleManagerOrHigher(Long restaurantId){
         User user = this.getAuthenticatedUser();
-        Optional<RestaurantStaff> restaurantStaff = restaurantStaffRepository.findByUserAndRestaurantId(user, restaurantId);
+        Optional<RestaurantStaff> restaurantStaff = restaurantStaffRepository.findByUserIdAndRestaurantId(user.getId(), restaurantId);
+
+        System.out.println(restaurantStaff.toString());
 
         if(restaurantStaff.isPresent()){
             RestaurantStaff staff = restaurantStaff.get();

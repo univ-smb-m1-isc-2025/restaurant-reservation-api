@@ -1,10 +1,10 @@
-package m1.info.reza.planning.closing;
+package m1.info.reza.planning.closure;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import m1.info.reza.planning.RestaurantOpening;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 public class RestaurantClosure {
@@ -13,10 +13,13 @@ public class RestaurantClosure {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private LocalDate closureDate;
+
     @ManyToOne
     @JoinColumn(name = "opening_id")
+    @JsonBackReference
     private RestaurantOpening opening;
-    private LocalDate closureDate;
+
 
     public RestaurantOpening getOpening() {
         return opening;
@@ -32,5 +35,13 @@ public class RestaurantClosure {
 
     public Long getId() {
         return id;
+    }
+
+    public LocalDate getClosureDate() {
+        return closureDate;
+    }
+
+    public void setClosureDate(LocalDate closureDate) {
+        this.closureDate = closureDate;
     }
 }

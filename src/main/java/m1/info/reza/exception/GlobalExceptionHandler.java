@@ -1,5 +1,6 @@
 package m1.info.reza.exception;
 
+import m1.info.reza.exception.custom.BadRequestException;
 import m1.info.reza.exception.custom.UnauthorizedAccessException;
 import m1.info.reza.response.ApiResponse;
 import m1.info.reza.response.ResponseUtil;
@@ -20,6 +21,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
         String message = ex.getBindingResult().getFieldErrors().get(0).getDefaultMessage();
         return new ResponseEntity<>(ResponseUtil.error(message), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<ApiResponse<String>> handleBadRequestException(BadRequestException ex) {
+        ApiResponse<String> response = ResponseUtil.error(ex.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(BadCredentialsException.class)

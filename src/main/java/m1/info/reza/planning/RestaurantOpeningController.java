@@ -28,8 +28,7 @@ public class RestaurantOpeningController {
 
     @PostMapping("/add")
     public ResponseEntity<ApiResponse<RestaurantDTO>> addOpeningHours(@PathVariable Long id, @Valid @RequestBody List<OpeningHoursRequest> openings) {
-
-        authenticatedUserService.checkAuthenticatedUserRoleManagerOrHiger(id);
+        authenticatedUserService.checkAuthenticatedUserRoleManagerOrHigher(id);
 
         Restaurant restaurant = openingService.saveOpeningHours(id, openings);
         RestaurantDTO result = new RestaurantDTO(restaurant);

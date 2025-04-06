@@ -1,7 +1,8 @@
 package m1.info.reza.planning.DTO;
 
 import jakarta.validation.constraints.NotNull;
-import m1.info.reza.planning.day.DayOfWeek;
+
+import java.time.DayOfWeek;
 import java.time.LocalTime;
 
 public class OpeningHoursRequest {

@@ -1,5 +1,6 @@
 package m1.info.reza.restaurant;
 
+import jakarta.persistence.EntityNotFoundException;
 import m1.info.reza.restaurant.DTO.RestaurantCreateRequest;
 import m1.info.reza.staff.RestaurantStaff;
 import m1.info.reza.staff.RestaurantStaffService;
@@ -7,6 +8,7 @@ import m1.info.reza.user.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -36,4 +38,13 @@ public class RestaurantService {
         return restaurant;
     }
 
+    public Restaurant getRestaurant(Long restaurantId) {
+        Optional<Restaurant> restaurant = restaurantRepository.findById(restaurantId);
+
+        if (restaurant.isPresent()) {
+            return restaurant.get();
+        }
+
+        throw new EntityNotFoundException("Le restaurant avec l'id" + restaurantId +" n'existe pas.");
+    }
 }

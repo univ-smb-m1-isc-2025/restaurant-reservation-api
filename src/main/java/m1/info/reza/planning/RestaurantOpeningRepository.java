@@ -1,11 +1,11 @@
 package m1.info.reza.planning;
 
-import m1.info.reza.planning.day.DayOfWeek;
 import m1.info.reza.restaurant.Restaurant;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.DayOfWeek;
 import java.time.LocalTime;
 
 
