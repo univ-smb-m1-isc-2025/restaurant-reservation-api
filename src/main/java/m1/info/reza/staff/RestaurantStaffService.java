@@ -1,6 +1,7 @@
 package m1.info.reza.staff;
 
 import jakarta.transaction.Transactional;
+import m1.info.reza.exception.custom.BadRequestException;
 import m1.info.reza.restaurant.Restaurant;
 import m1.info.reza.staff.roles.Role;
 import m1.info.reza.staff.roles.RoleService;
@@ -8,6 +9,7 @@ import m1.info.reza.user.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,6 +29,17 @@ public class RestaurantStaffService {
 
         RestaurantStaff restaurantStaff = new RestaurantStaff(user, restaurant, ownerRole);
         restaurantStaffRepository.save(restaurantStaff);
+    }
+
+    public RestaurantStaff addStaff(Restaurant restaurant, User user, Role role) {
+        if(Objects.equals(role.getRoleName(), "OWNER")){
+            throw new BadRequestException("Vous ne pouvez pas ajouter un utilisateur au rôle d'OWNER.");
+        }
+
+        RestaurantStaff restaurantStaff = new RestaurantStaff(user, restaurant, role);
+        restaurantStaffRepository.save(restaurantStaff);
+
+        return restaurantStaff;
     }
 
     public List<RestaurantStaff> getRestaurantsForUser(User user) {
