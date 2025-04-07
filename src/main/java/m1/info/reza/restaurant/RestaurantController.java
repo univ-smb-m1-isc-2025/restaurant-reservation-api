@@ -54,17 +54,10 @@ public class RestaurantController {
         List<RestaurantWithRoleDTO> restaurantWithRoleDTOS = restaurants.stream()
                 .map(staff -> new RestaurantWithRoleDTO(
                         new RestaurantDTO(
-                                staff.getRestaurant().getId(),
-                                staff.getRestaurant().getName(),
-                                staff.getRestaurant().getAddress(),
-                                staff.getRestaurant().getCity(),
-                                staff.getRestaurant().getZipcode(),
-                                staff.getRestaurant().getCapacity(),
-                                staff.getRestaurant().getOpenings()
+                                staff.getRestaurant()
                         ),
                         new RoleDTO(
-                                staff.getRole().getId(),
-                                staff.getRole().getRoleName()
+                                staff.getRole()
                         )
                 ))
                 .toList();

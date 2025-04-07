@@ -32,8 +32,6 @@ public class AuthenticatedUserService {
         User user = this.getAuthenticatedUser();
         Optional<RestaurantStaff> restaurantStaff = restaurantStaffRepository.findByUserIdAndRestaurantId(user.getId(), restaurantId);
 
-        System.out.println(restaurantStaff.toString());
-
         if(restaurantStaff.isPresent()){
             RestaurantStaff staff = restaurantStaff.get();
             if (staff.getRole().getRoleName().equals("OWNER") || staff.getRole().getRoleName().equals("MANAGER")){
@@ -42,5 +40,16 @@ public class AuthenticatedUserService {
         }
 
         throw new UnauthorizedAccessException("Vous n'avez pas les permissions nécessaires afin de faire cette opération.");
+    }
+
+    public void checkAuthenticatedUserIsStaff(Long restaurantId){
+        User user = this.getAuthenticatedUser();
+        Optional<RestaurantStaff> restaurantStaff = restaurantStaffRepository.findByUserIdAndRestaurantId(user.getId(), restaurantId);
+
+        if(restaurantStaff.isPresent()){
+            return;
+        }
+
+        throw new UnauthorizedAccessException("Vous devez faire partie du staff de ce restaurant pour y accéder.");
     }
 }

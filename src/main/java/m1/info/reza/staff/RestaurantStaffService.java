@@ -35,4 +35,10 @@ public class RestaurantStaffService {
         return staffList;
     }
 
+    public List<RestaurantStaff> getRestaurantStaff(Restaurant restaurant){
+        List<RestaurantStaff> staffList = restaurantStaffRepository.findByRestaurant(restaurant);
+
+        return staffList;
+    }
+
 }

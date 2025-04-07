@@ -14,4 +14,6 @@ public interface RestaurantStaffRepository extends JpaRepository<RestaurantStaff
     List<RestaurantStaff> findByUser(User user);
 
     Optional<RestaurantStaff> findByUserIdAndRestaurantId(Long userId, Long restaurantId);
+
+    List<RestaurantStaff> findByRestaurant(Restaurant restaurant);
 }
