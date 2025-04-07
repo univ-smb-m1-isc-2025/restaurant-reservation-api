@@ -5,6 +5,7 @@ import m1.info.reza.restaurant.Restaurant;
 import m1.info.reza.user.User;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -24,6 +25,10 @@ public class RoleService {
         }
 
         throw new EntityNotFoundException("Le rôle avec l'id" + roleId +" n'existe pas.");
+    }
+
+    public List<Role> getRoles(){
+        return roleRepository.findAll();
     }
 
     public Role getOwnerRole() {
