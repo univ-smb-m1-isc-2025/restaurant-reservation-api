@@ -1,5 +1,6 @@
 package m1.info.reza.staff;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import m1.info.reza.exception.custom.BadRequestException;
 import m1.info.reza.restaurant.Restaurant;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 public class RestaurantStaffService {
@@ -34,7 +35,7 @@ public class RestaurantStaffService {
         restaurantStaffRepository.save(restaurantStaff);
     }
 
-    public RestaurantStaff addStaff(Restaurant restaurant, User user, Role role) {
+    public RestaurantStaff create(Restaurant restaurant, User user, Role role) {
         if(Objects.equals(role.getRoleName(), "OWNER")){
             throw new BadRequestException("Vous ne pouvez pas ajouter un utilisateur au rôle d'OWNER.");
         }
@@ -49,16 +50,36 @@ public class RestaurantStaffService {
         return restaurantStaff;
     }
 
+    public RestaurantStaff update(RestaurantStaff staff, Role role) {
+        if(Objects.equals(role.getRoleName(), "OWNER")){
+            throw new BadRequestException("Vous ne pouvez définir un utilisateur au rôle d'OWNER.");
+        }
+
+        staff.setRole(role);
+        return restaurantStaffRepository.save(staff);
+    }
+
+
     public List<RestaurantStaff> getRestaurantsForUser(User user) {
         List<RestaurantStaff> staffList = restaurantStaffRepository.findByUser(user);
 
         return staffList;
     }
 
-    public List<RestaurantStaff> getRestaurantStaff(Restaurant restaurant){
+    public List<RestaurantStaff> getAllStaffFromRestaurant(Restaurant restaurant){
         List<RestaurantStaff> staffList = restaurantStaffRepository.findByRestaurant(restaurant);
 
         return staffList;
+    }
+
+    public RestaurantStaff getRestaurantStaff(Long restaurantId, Long restaurantStaffId){
+        Optional<RestaurantStaff> staffOptional = restaurantStaffRepository.findByUserIdAndRestaurantId(restaurantStaffId, restaurantId);
+
+        if (staffOptional.isPresent()) {
+            return staffOptional.get();
+        }
+
+        throw new EntityNotFoundException("Le membre du staff avec l'id " + restaurantStaffId +" n'existe pas.");
     }
 
 }
