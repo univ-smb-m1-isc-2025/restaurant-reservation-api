@@ -66,4 +66,14 @@ public class RestaurantController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("/{restaurantId}")
+    public ResponseEntity<ApiResponse<RestaurantDTO>> index(@PathVariable Long restaurantId) {
+
+        Restaurant restaurant = restaurantService.getRestaurant(restaurantId);
+        RestaurantDTO restaurantDTO = new RestaurantDTO(restaurant);
+
+        ApiResponse<RestaurantDTO> response = ResponseUtil.success("Le restaurant a été récupéré avec succès.", restaurantDTO);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
 }
