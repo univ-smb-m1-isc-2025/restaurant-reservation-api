@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import m1.info.reza.reservation.Reservation;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.util.Date;
@@ -19,7 +20,7 @@ public class Customer {
 
     private String phone;
 
-    @CreatedDate
+    @CreationTimestamp
     private Date creationDate;
 
     @OneToMany(mappedBy = "customer")
