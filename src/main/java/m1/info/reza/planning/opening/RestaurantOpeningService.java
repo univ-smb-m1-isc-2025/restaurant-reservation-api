@@ -31,18 +31,17 @@ public class RestaurantOpeningService {
         Restaurant restaurant = restaurantService.getRestaurant(restaurantId);
 
         for (OpeningHoursRequest request : openings) {
-            DayOfWeek day = request.getDay();
-            LocalTime openingTime = request.getOpeningTime();
-            LocalTime closingTime = request.getClosingTime();
-
-            boolean isOverlapping = openingRepository.existsByRestaurantAndDayAndTimeOverlap(
-                    restaurant, day, openingTime, closingTime);
-
-            if (isOverlapping) {
-                throw new IllegalArgumentException("Le créneau du " + day + " de " + openingTime + " à " + closingTime + " chevauche un créneau existant.");
+            if(request.getOpeningTime().isAfter(request.getClosingTime())){
+                throw new IllegalArgumentException("Le créneau du " + request.getDay() + " de " + request.getOpeningTime() +
+                        " à " + request.getClosingTime() + " a une heure d'ouverture qui est après la fermeture.");
             }
 
-            RestaurantOpening newOpening = new RestaurantOpening(restaurant, day, openingTime, closingTime);
+            if (isOverlapping(restaurant, request)) {
+                throw new IllegalArgumentException("Le créneau du " + request.getDay() + " de " + request.getOpeningTime() +
+                        " à " + request.getClosingTime() + " chevauche un créneau existant.");
+            }
+
+            RestaurantOpening newOpening = new RestaurantOpening(restaurant, request.getDay(), request.getOpeningTime(), request.getClosingTime());
             openingRepository.save(newOpening);
         }
 
@@ -66,5 +65,14 @@ public class RestaurantOpeningService {
 
         Optional<RestaurantOpening> openingOptional = openingRepository.findValidOpeningByDateTime(day, time, date);
         return openingOptional.isPresent();
+    }
+
+    private boolean isOverlapping(Restaurant restaurant, OpeningHoursRequest request){
+        DayOfWeek day = request.getDay();
+        LocalTime openingTime = request.getOpeningTime();
+        LocalTime closingTime = request.getClosingTime();
+
+       return openingRepository.existsByRestaurantAndDayAndTimeOverlap(
+                restaurant, day, openingTime, closingTime);
     }
 }
