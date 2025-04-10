@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import m1.info.reza.reservation.Reservation;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.util.Date;
 import java.util.Set;
@@ -17,6 +18,8 @@ public class Customer {
     private Long id;
 
     private String phone;
+
+    @CreatedDate
     private Date creationDate;
 
     @OneToMany(mappedBy = "customer")
@@ -25,9 +28,8 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String phone, Date creationDate) {
+    public Customer(String phone) {
         this.phone = phone;
-        this.creationDate = creationDate;
     }
 
     public void setId(Long id) {

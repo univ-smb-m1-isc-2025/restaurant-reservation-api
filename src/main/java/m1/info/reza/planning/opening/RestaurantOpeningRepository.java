@@ -6,7 +6,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
+import java.util.Optional;
 
 
 public interface RestaurantOpeningRepository extends JpaRepository<RestaurantOpening, Long> {
@@ -20,4 +23,22 @@ public interface RestaurantOpeningRepository extends JpaRepository<RestaurantOpe
                                                    @Param("day") DayOfWeek day,
                                                    @Param("openingTime") LocalTime openingTime,
                                                    @Param("closingTime") LocalTime closingTime);
+
+    @Query("""
+    SELECT ro FROM RestaurantOpening ro
+    WHERE ro.day = :day
+      AND ro.openingTime <= :time
+      AND ro.closingTime > :time
+      AND NOT EXISTS (
+          SELECT rc FROM RestaurantClosure rc
+          WHERE rc.opening = ro AND rc.closureDate = :date
+      )
+    """)
+    Optional<RestaurantOpening> findValidOpeningByDateTime(
+            @Param("day") DayOfWeek day,
+            @Param("time") LocalTime time,
+            @Param("date") LocalDate date
+    );
+
+
 }

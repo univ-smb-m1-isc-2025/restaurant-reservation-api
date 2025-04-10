@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
@@ -55,5 +57,27 @@ public class RestaurantOpeningService {
         }
 
         throw new EntityNotFoundException("Le créneau d'ouverture spécifié avec l'id" + openingId +" n'existe pas.");
+    }
+
+    public boolean isRestaurantOpenAt(LocalDateTime dateTime){
+        DayOfWeek day = dateTime.getDayOfWeek();
+        LocalTime time = dateTime.toLocalTime();
+        LocalDate date = dateTime.toLocalDate();
+        System.out.println(day + " " + time + " " + date);
+
+        Optional<RestaurantOpening> openingOptional = openingRepository.findValidOpeningByDateTime(day, time, date);
+        if(openingOptional.isPresent()){
+            RestaurantOpening opening = openingOptional.get();
+            System.out.println("----------");
+
+            System.out.println(opening.getId());
+            System.out.println(opening.getDay());
+            System.out.println(opening.getOpeningTime());
+            System.out.println(opening.getClosingTime());
+        }
+        else {
+            System.out.println("IL EXISTE PAS ZEBI");
+        }
+        return openingOptional.isPresent();
     }
 }

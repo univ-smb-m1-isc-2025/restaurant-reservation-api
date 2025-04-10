@@ -23,19 +23,21 @@ public class Reservation {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
+    private int nbGuests;
+
     @Enumerated(EnumType.STRING)
     private ReservationStatus reservationStatus;
-
     private LocalDateTime reservationDate;
 
     public Reservation() {
     }
 
-    public Reservation(Customer customer, Restaurant restaurant, ReservationStatus reservationStatus, LocalDateTime reservationDate) {
+    public Reservation(Restaurant restaurant, Customer customer, LocalDateTime reservationDate, int nbGuests) {
         this.customer = customer;
         this.restaurant = restaurant;
-        this.reservationStatus = reservationStatus;
+        this.nbGuests = nbGuests;
         this.reservationDate = reservationDate;
+        this.reservationStatus = ReservationStatus.PENDING;
     }
 
     public Long getId() {
@@ -62,20 +64,28 @@ public class Reservation {
         this.restaurant = restaurant;
     }
 
+    public int getNbGuests() {
+        return nbGuests;
+    }
+
+    public void setNbGuests(int nbGuests) {
+        this.nbGuests = nbGuests;
+    }
+
+    public LocalDateTime getReservationDate() {
+        return reservationDate;
+    }
+
+    public void setReservationDate(LocalDateTime reservationDate) {
+        this.reservationDate = reservationDate;
+    }
+
     public ReservationStatus getReservationStatus() {
         return reservationStatus;
     }
 
     public void setReservationStatus(ReservationStatus reservationStatus) {
         this.reservationStatus = reservationStatus;
-    }
-
-    public LocalDateTime getReservationDateTime() {
-        return reservationDate;
-    }
-
-    public void setReservationDateTime(LocalDateTime reservationDate) {
-        this.reservationDate = reservationDate;
     }
 }
 
