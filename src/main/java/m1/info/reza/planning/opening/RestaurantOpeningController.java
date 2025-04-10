@@ -1,14 +1,12 @@
-package m1.info.reza.planning;
+package m1.info.reza.planning.opening;
 
 import jakarta.validation.Valid;
 import m1.info.reza.auth.AuthenticatedUserService;
 import m1.info.reza.planning.DTO.OpeningHoursRequest;
-import m1.info.reza.planning.opening.RestaurantOpeningService;
 import m1.info.reza.response.ApiResponse;
 import m1.info.reza.response.ResponseUtil;
 import m1.info.reza.restaurant.DTO.RestaurantDTO;
 import m1.info.reza.restaurant.Restaurant;
-import m1.info.reza.user.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

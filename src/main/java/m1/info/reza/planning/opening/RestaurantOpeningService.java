@@ -63,21 +63,8 @@ public class RestaurantOpeningService {
         DayOfWeek day = dateTime.getDayOfWeek();
         LocalTime time = dateTime.toLocalTime();
         LocalDate date = dateTime.toLocalDate();
-        System.out.println(day + " " + time + " " + date);
 
         Optional<RestaurantOpening> openingOptional = openingRepository.findValidOpeningByDateTime(day, time, date);
-        if(openingOptional.isPresent()){
-            RestaurantOpening opening = openingOptional.get();
-            System.out.println("----------");
-
-            System.out.println(opening.getId());
-            System.out.println(opening.getDay());
-            System.out.println(opening.getOpeningTime());
-            System.out.println(opening.getClosingTime());
-        }
-        else {
-            System.out.println("IL EXISTE PAS ZEBI");
-        }
         return openingOptional.isPresent();
     }
 }
