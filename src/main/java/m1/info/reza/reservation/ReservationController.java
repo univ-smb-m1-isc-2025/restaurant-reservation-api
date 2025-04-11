@@ -30,11 +30,12 @@ public class ReservationController {
     private final RestaurantOpeningService openingService;
     private final AuthenticatedUserService authenticatedUserService;
 
-    public ReservationController(RestaurantService restaurantService, ReservationService reservationService, CustomerService customerService, RestaurantOpeningService openingService) {
+    public ReservationController(RestaurantService restaurantService, ReservationService reservationService, CustomerService customerService, RestaurantOpeningService openingService, AuthenticatedUserService authenticatedUserService) {
         this.restaurantService = restaurantService;
         this.reservationService = reservationService;
         this.customerService = customerService;
         this.openingService = openingService;
+        this.authenticatedUserService = authenticatedUserService;
     }
 
     @PostMapping("/create")
