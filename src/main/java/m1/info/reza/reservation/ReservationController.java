@@ -1,6 +1,7 @@
 package m1.info.reza.reservation;
 
 import jakarta.validation.Valid;
+import m1.info.reza.auth.AuthenticatedUserService;
 import m1.info.reza.customer.Customer;
 import m1.info.reza.customer.CustomerService;
 import m1.info.reza.planning.opening.RestaurantOpening;
@@ -27,6 +28,7 @@ public class ReservationController {
     private final ReservationService reservationService;
     private final CustomerService customerService;
     private final RestaurantOpeningService openingService;
+    private final AuthenticatedUserService authenticatedUserService;
 
     public ReservationController(RestaurantService restaurantService, ReservationService reservationService, CustomerService customerService, RestaurantOpeningService openingService) {
         this.restaurantService = restaurantService;
@@ -52,6 +54,8 @@ public class ReservationController {
             @PathVariable Long openingId,
             @PathVariable LocalDate date
     ) {
+        authenticatedUserService.checkAuthenticatedUserIsStaff(restaurantId);
+
         Restaurant restaurant = restaurantService.getRestaurant(restaurantId);
         RestaurantOpening opening = openingService.getOpening(openingId);
 
