@@ -30,8 +30,7 @@ public class RestaurantOpening {
 
     @OneToMany(mappedBy = "opening")
     @JsonManagedReference
-    private List<RestaurantClosure> closures;
-
+    private List<RestaurantClosure> closures = new ArrayList<>();
 
     public RestaurantOpening() {
     }
