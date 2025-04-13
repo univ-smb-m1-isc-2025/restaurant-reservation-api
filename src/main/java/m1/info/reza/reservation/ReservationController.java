@@ -12,7 +12,6 @@ import m1.info.reza.response.ApiResponse;
 import m1.info.reza.response.ResponseUtil;
 import m1.info.reza.restaurant.Restaurant;
 import m1.info.reza.restaurant.RestaurantService;
-import m1.info.reza.staff.DTO.RestaurantStaffDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -72,25 +71,27 @@ public class ReservationController {
 
 
     @PostMapping("/confirm/{reservationId}")
-    public ResponseEntity<ApiResponse<Reservation>> validate(@PathVariable Long restaurantId, @PathVariable Long reservationId){
+    public ResponseEntity<ApiResponse<ReservationDTO>> validate(@PathVariable Long restaurantId, @PathVariable Long reservationId){
         authenticatedUserService.checkAuthenticatedUserIsStaff(restaurantId);
 
         Reservation reservation = reservationService.getReservation(reservationId);
         reservation = reservationService.confirm(reservation);
+        ReservationDTO reservationDTO = new ReservationDTO(reservation);
 
-        ApiResponse<Reservation> response = ResponseUtil.success("La réservation a été confirmée avec succès.", reservation);
+        ApiResponse<ReservationDTO> response = ResponseUtil.success("La réservation a été confirmée avec succès.", reservationDTO);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping("/cancel/{reservationId}")
-    public ResponseEntity<ApiResponse<Reservation>> cancel(@PathVariable Long restaurantId, @PathVariable Long reservationId){
+    public ResponseEntity<ApiResponse<ReservationDTO>> cancel(@PathVariable Long restaurantId, @PathVariable Long reservationId){
         Reservation reservation = reservationService.getReservation(reservationId);
 
         reservation = reservationService.cancel(reservation);
+        ReservationDTO reservationDTO = new ReservationDTO(reservation);
 
         //TODO : Envoyer mail
 
-        ApiResponse<Reservation> response = ResponseUtil.success("La réservation a été annulée avec succès.", reservation);
+        ApiResponse<ReservationDTO> response = ResponseUtil.success("La réservation a été annulée avec succès.", reservationDTO);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
