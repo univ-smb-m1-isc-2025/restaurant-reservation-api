@@ -29,14 +29,11 @@ public class ReservationController {
     private final CustomerService customerService;
     private final AuthenticatedUserService  authenticatedUserService;
     private final RestaurantOpeningService openingService;
-    private final AuthenticatedUserService authenticatedUserService;
 
-    public ReservationController(RestaurantService restaurantService, ReservationService reservationService, CustomerService customerService, AuthenticatedUserService authenticatedUserService) {
-    public ReservationController(RestaurantService restaurantService, ReservationService reservationService, CustomerService customerService, RestaurantOpeningService openingService, AuthenticatedUserService authenticatedUserService) {
+    public ReservationController(RestaurantService restaurantService, ReservationService reservationService, CustomerService customerService, AuthenticatedUserService authenticatedUserService, RestaurantOpeningService openingService) {
         this.restaurantService = restaurantService;
         this.reservationService = reservationService;
         this.customerService = customerService;
-        this.authenticatedUserService = authenticatedUserService;
         this.openingService = openingService;
         this.authenticatedUserService = authenticatedUserService;
     }
