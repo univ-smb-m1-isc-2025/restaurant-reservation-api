@@ -47,6 +47,7 @@ public class ReservationService {
 
         Reservation reservation = new Reservation(restaurant, customer, reservationDate, nbGuests);
         reservationRepository.save(reservation);
+
         return reservation;
     }
 

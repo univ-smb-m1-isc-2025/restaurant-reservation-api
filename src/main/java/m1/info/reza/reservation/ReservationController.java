@@ -65,6 +65,9 @@ public class ReservationController {
                 .map(ReservationDTO::new)
                 .toList();
 
+        //TODO : envoyer email
+
+
         ApiResponse<List<ReservationDTO>> response = ResponseUtil.success("La liste des réservations pour la date donnée a été récupérée avec succès.", reservationDTOS);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -88,8 +91,6 @@ public class ReservationController {
 
         reservation = reservationService.cancel(reservation);
         ReservationDTO reservationDTO = new ReservationDTO(reservation);
-
-        //TODO : Envoyer mail
 
         ApiResponse<ReservationDTO> response = ResponseUtil.success("La réservation a été annulée avec succès.", reservationDTO);
         return new ResponseEntity<>(response, HttpStatus.OK);
