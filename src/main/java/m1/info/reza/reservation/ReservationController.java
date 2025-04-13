@@ -1,6 +1,7 @@
 package m1.info.reza.reservation;
 
 import jakarta.validation.Valid;
+import m1.info.reza.auth.AuthenticatedUserService;
 import m1.info.reza.customer.Customer;
 import m1.info.reza.customer.CustomerService;
 import m1.info.reza.reservation.DTO.CreateReservationRequest;
@@ -22,11 +23,13 @@ public class ReservationController {
     private final RestaurantService restaurantService;
     private final ReservationService reservationService;
     private final CustomerService customerService;
+    private final AuthenticatedUserService  authenticatedUserService;
 
-    public ReservationController(RestaurantService restaurantService, ReservationService reservationService, CustomerService customerService) {
+    public ReservationController(RestaurantService restaurantService, ReservationService reservationService, CustomerService customerService, AuthenticatedUserService authenticatedUserService) {
         this.restaurantService = restaurantService;
         this.reservationService = reservationService;
         this.customerService = customerService;
+        this.authenticatedUserService = authenticatedUserService;
     }
 
     @PostMapping("/create")
@@ -39,4 +42,29 @@ public class ReservationController {
         ApiResponse<Reservation> response = ResponseUtil.success("La réservation a été prise en compte.", reservation);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
+
+    @PostMapping("/confirm/{reservationId}")
+    public ResponseEntity<ApiResponse<Reservation>> validate(@PathVariable Long restaurantId, @PathVariable Long reservationId){
+        authenticatedUserService.checkAuthenticatedUserIsStaff(restaurantId);
+
+        Reservation reservation = reservationService.getReservation(reservationId);
+        reservation = reservationService.confirm(reservation);
+
+        ApiResponse<Reservation> response = ResponseUtil.success("La réservation a été confirmée avec succès.", reservation);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/cancel/{reservationId}")
+    public ResponseEntity<ApiResponse<Reservation>> cancel(@PathVariable Long restaurantId, @PathVariable Long reservationId){
+        Reservation reservation = reservationService.getReservation(reservationId);
+
+        reservation = reservationService.cancel(reservation);
+
+        //TODO : Envoyer mail
+
+        ApiResponse<Reservation> response = ResponseUtil.success("La réservation a été annulée avec succès.", reservation);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+
 }

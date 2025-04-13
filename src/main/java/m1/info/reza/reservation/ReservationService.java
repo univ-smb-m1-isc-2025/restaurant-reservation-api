@@ -1,16 +1,19 @@
 package m1.info.reza.reservation;
 
+import jakarta.persistence.EntityNotFoundException;
 import m1.info.reza.customer.Customer;
 import m1.info.reza.exception.custom.BadRequestException;
 import m1.info.reza.planning.opening.RestaurantOpening;
 import m1.info.reza.planning.opening.RestaurantOpeningRepository;
 import m1.info.reza.planning.opening.RestaurantOpeningService;
+import m1.info.reza.reservation.status.ReservationStatus;
 import m1.info.reza.restaurant.Restaurant;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReservationService {
@@ -46,6 +49,34 @@ public class ReservationService {
         return reservation;
     }
 
+    public Reservation confirm(Reservation reservation) {
+        if(reservation.getReservationStatus() != ReservationStatus.PENDING){
+            throw new BadRequestException("Vous ne pouvez pas valider une réservation qui n'est pas en attente.");
+        }
+
+        reservation.setReservationStatus(ReservationStatus.COMPLETED);
+        return reservationRepository.save(reservation);
+    }
+
+    public Reservation cancel(Reservation reservation) {
+        if(reservation.getReservationStatus() == ReservationStatus.COMPLETED){
+            throw new BadRequestException("Vous ne pouvez pas annuler une réservation qui a été confirmée.");
+        }
+
+        reservation.setReservationStatus(ReservationStatus.CANCELED);
+        return reservationRepository.save(reservation);
+    }
+
+
+    public Reservation getReservation(Long id) {
+        Optional<Reservation> reservation = reservationRepository.findById(id);
+
+        if(reservation.isEmpty()){
+            throw new EntityNotFoundException("La réservation avec l'id : " + id + " n'existe pas");
+        }
+
+        return reservation.get();
+    }
 
     private int getGuestCountAroundTime(Restaurant restaurant, LocalDateTime targetTime) {
         LocalDateTime start = targetTime.minusMinutes(90);
@@ -57,6 +88,7 @@ public class ReservationService {
         );
         return count != null ? count : 0;
     }
+
 
 
 }

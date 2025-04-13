@@ -35,6 +35,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/reservation/{restaurantId}/create").permitAll()
+                        .requestMatchers("/reservation/{restaurantId}/cancel/{reservationId}").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
