@@ -2,6 +2,7 @@ package m1.info.reza.auth;
 
 import m1.info.reza.auth.DTO.LoginUserDto;
 import m1.info.reza.auth.DTO.RegisterUserDto;
+import m1.info.reza.exception.custom.BadRequestException;
 import m1.info.reza.user.User;
 import m1.info.reza.user.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,7 +31,7 @@ public class AuthService {
 
     public User signup(RegisterUserDto input) {
         if (userRepository.existsByEmail(input.getEmail())) {
-            throw new RuntimeException("Cet e-mail est déjà utilisé.");
+            throw new BadRequestException("L'e-mail spécifié est déjà utilisé.");
         }
 
         User user = new User(

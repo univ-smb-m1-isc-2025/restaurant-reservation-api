@@ -10,6 +10,7 @@ import m1.info.reza.reservation.status.ReservationStatus;
 import m1.info.reza.restaurant.Restaurant;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
@@ -48,6 +49,18 @@ public class ReservationService {
         reservationRepository.save(reservation);
         return reservation;
     }
+
+    public List<Reservation> getReservationsForOpeningOnDate(Restaurant restaurant, RestaurantOpening opening, LocalDate date) {
+        if (!opening.getDay().equals(date.getDayOfWeek())) {
+            throw new BadRequestException("La date ne correspond pas au jour de l'ouverture.");
+        }
+
+        LocalDateTime startDateTime = date.atTime(opening.getOpeningTime());
+        LocalDateTime endDateTime = date.atTime(opening.getClosingTime());
+
+        return reservationRepository.findReservationsBetweenDates(restaurant.getId(), startDateTime, endDateTime);
+    }
+
 
     public Reservation confirm(Reservation reservation) {
         if(reservation.getReservationStatus() != ReservationStatus.PENDING){
