@@ -73,7 +73,7 @@ public class ReservationController {
     }
 
     @GetMapping("/{reservationId}")
-    public ResponseEntity<ApiResponse<ReservationDTO>> validate(@PathVariable Long reservationId){
+    public ResponseEntity<ApiResponse<ReservationDTO>> index(@PathVariable Long reservationId){
         Reservation reservation = reservationService.getReservation(reservationId);
         ReservationDTO reservationDTO = new ReservationDTO(reservation);
 
@@ -83,10 +83,11 @@ public class ReservationController {
 
 
     @PostMapping("/confirm/{reservationId}")
-    public ResponseEntity<ApiResponse<ReservationDTO>> validate(@PathVariable Long restaurantId, @PathVariable Long reservationId){
-        authenticatedUserService.checkAuthenticatedUserIsStaff(restaurantId);
-
+    public ResponseEntity<ApiResponse<ReservationDTO>> validate(@PathVariable Long reservationId){
         Reservation reservation = reservationService.getReservation(reservationId);
+
+        authenticatedUserService.checkAuthenticatedUserIsStaff(reservation.getRestaurant().getId());
+
         reservation = reservationService.confirm(reservation);
         ReservationDTO reservationDTO = new ReservationDTO(reservation);
 
@@ -95,7 +96,7 @@ public class ReservationController {
     }
 
     @DeleteMapping("/cancel/{reservationId}")
-    public ResponseEntity<ApiResponse<ReservationDTO>> cancel(@PathVariable Long restaurantId, @PathVariable Long reservationId){
+    public ResponseEntity<ApiResponse<ReservationDTO>> cancel(@PathVariable Long reservationId){
         Reservation reservation = reservationService.getReservation(reservationId);
 
         reservation = reservationService.cancel(reservation);
