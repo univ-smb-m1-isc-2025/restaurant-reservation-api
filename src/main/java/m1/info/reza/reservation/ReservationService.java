@@ -32,7 +32,7 @@ public class ReservationService {
             throw new BadRequestException("Le nombre d'invités excède la capacté totale du restaurant.");
         }
 
-        if(!openingService.isRestaurantOpenAt(reservationDate)){
+        if(!openingService.isRestaurantOpenAt(restaurant, reservationDate)){
             throw new BadRequestException("Le restaurant n'est pas ouvert à cet horaire.");
         }
 

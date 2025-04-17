@@ -27,6 +27,7 @@ public interface RestaurantOpeningRepository extends JpaRepository<RestaurantOpe
     @Query("""
     SELECT ro FROM RestaurantOpening ro
     WHERE ro.day = :day
+      AND ro.restaurant = :restaurant
       AND ro.openingTime <= :time
       AND ro.closingTime > :time
       AND NOT EXISTS (
@@ -35,6 +36,7 @@ public interface RestaurantOpeningRepository extends JpaRepository<RestaurantOpe
       )
     """)
     Optional<RestaurantOpening> findValidOpeningByDateTime(
+            @Param("restaurant") Restaurant restaurant,
             @Param("day") DayOfWeek day,
             @Param("time") LocalTime time,
             @Param("date") LocalDate date

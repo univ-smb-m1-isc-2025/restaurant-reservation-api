@@ -58,12 +58,12 @@ public class RestaurantOpeningService {
         throw new EntityNotFoundException("Le créneau d'ouverture spécifié avec l'id" + openingId +" n'existe pas.");
     }
 
-    public boolean isRestaurantOpenAt(LocalDateTime dateTime){
+    public boolean isRestaurantOpenAt(Restaurant restaurant, LocalDateTime dateTime){
         DayOfWeek day = dateTime.getDayOfWeek();
         LocalTime time = dateTime.toLocalTime();
         LocalDate date = dateTime.toLocalDate();
 
-        Optional<RestaurantOpening> openingOptional = openingRepository.findValidOpeningByDateTime(day, time, date);
+        Optional<RestaurantOpening> openingOptional = openingRepository.findValidOpeningByDateTime(restaurant, day, time, date);
         return openingOptional.isPresent();
     }
 
