@@ -21,7 +21,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/reservation/{restaurantId}")
+@RequestMapping("/reservation")
 public class ReservationController {
 
     private final RestaurantService restaurantService;
@@ -40,7 +40,7 @@ public class ReservationController {
         this.mailService = mailService;
     }
 
-    @PostMapping("/create")
+    @PostMapping("/{restaurantId}/create")
     public ResponseEntity<ApiResponse<Reservation>> create(@PathVariable Long restaurantId, @Valid @RequestBody CreateReservationRequest request){
         Restaurant restaurant = restaurantService.getRestaurant(restaurantId);
         Customer customer = customerService.findOrCreate(request.getCustomerEmail());
@@ -52,7 +52,7 @@ public class ReservationController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @GetMapping("/opening/{openingId}/date/{date}")
+    @GetMapping("/{restaurantId}/opening/{openingId}/date/{date}")
     public ResponseEntity<ApiResponse<List<ReservationDTO>>> getReservationsForOpeningOnDate(
             @PathVariable Long restaurantId,
             @PathVariable Long openingId,
@@ -69,6 +69,15 @@ public class ReservationController {
                 .toList();
 
         ApiResponse<List<ReservationDTO>> response = ResponseUtil.success("La liste des réservations pour la date donnée a été récupérée avec succès.", reservationDTOS);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/{reservationId}")
+    public ResponseEntity<ApiResponse<ReservationDTO>> validate(@PathVariable Long reservationId){
+        Reservation reservation = reservationService.getReservation(reservationId);
+        ReservationDTO reservationDTO = new ReservationDTO(reservation);
+
+        ApiResponse<ReservationDTO> response = ResponseUtil.success("La réservation a été récupérée avec succès.", reservationDTO);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
