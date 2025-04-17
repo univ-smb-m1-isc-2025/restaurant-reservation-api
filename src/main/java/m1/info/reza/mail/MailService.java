@@ -29,7 +29,7 @@ public class MailService {
     }
 
     public void sendReservationConfirmation(Reservation reservation) {
-        String emailBody = MailTemplate.buildReservationReminderEmail(reservation);
+        String emailBody = MailTemplate.buildReservationConfirmationEmail(reservation);
         sendEmail(reservation.getCustomer().getEmail(), "Confirmation de votre réservation", emailBody);
     }
 
