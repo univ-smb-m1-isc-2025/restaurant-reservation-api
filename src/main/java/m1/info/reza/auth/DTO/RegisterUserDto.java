@@ -20,6 +20,9 @@ public class RegisterUserDto {
     @NotNull(message = "Le champ 'lastName' ne peut pas être null.")
     private String lastName;
 
+    public RegisterUserDto() {
+    }
+
     public RegisterUserDto(String email, String password, String firstName, String lastName) {
         this.email = email;
         this.password = password;

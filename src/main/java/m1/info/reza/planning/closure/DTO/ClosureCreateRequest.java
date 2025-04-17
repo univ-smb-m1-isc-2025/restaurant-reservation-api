@@ -13,6 +13,9 @@ public class ClosureCreateRequest {
     @FutureOrPresent(message = "La date de fermeture ne peut pas être dans le passé.")
     private LocalDate dateOfClosure;
 
+    public ClosureCreateRequest() {
+    }
+
     public ClosureCreateRequest(Long openingId, LocalDate dateOfClosure) {
         this.openingId = openingId;
         this.dateOfClosure = dateOfClosure;

@@ -4,6 +4,9 @@ public class LoginUserDto {
     private String email;
     private String password;
 
+    public LoginUserDto() {
+    }
+
     public LoginUserDto(String username, String password) {
         this.email = username;
         this.password = password;

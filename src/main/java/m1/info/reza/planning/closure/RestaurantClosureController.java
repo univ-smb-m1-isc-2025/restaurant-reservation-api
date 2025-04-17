@@ -30,7 +30,6 @@ public class RestaurantClosureController {
         this.restaurantOpeningService = restaurantOpeningService;
     }
 
-
     @PostMapping("/create")
     public ResponseEntity<ApiResponse<RestaurantDTO>> addOpeningHours(@PathVariable Long restaurantId, @Valid  @RequestBody ClosureCreateRequest closureCreateRequest) {
         authenticatedUserService.checkAuthenticatedUserRoleManagerOrHigher(restaurantId);
