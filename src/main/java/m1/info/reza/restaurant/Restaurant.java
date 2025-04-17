@@ -52,6 +52,10 @@ public class Restaurant {
         return address;
     }
 
+    public String getFullAddress() {
+        return address + " - " + city + " " + zipcode;
+    }
+
     public void setAddress(String address) {
         this.address = address;
     }

@@ -49,7 +49,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
-			<version>3.1.5</version>
 		</dependency>
 
 		<dependency>
@@ -104,6 +103,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 
+
 				<configuration>
 					<environmentVariables>
 						<!-- Default config for vanilla install of a local postgresql -->
@@ -112,8 +112,18 @@
 						<SPRING_DATASOURCE_PASSWORD>Reza123!</SPRING_DATASOURCE_PASSWORD>
 						<SPRING_JPA_HIBERNATE_DDL_AUTO>update</SPRING_JPA_HIBERNATE_DDL_AUTO>
 						<SPRING_JPA_DATABASE>POSTGRESQL</SPRING_JPA_DATABASE>
+						<SPRING_MAIL_HOST>smtp.gmail.com</SPRING_MAIL_HOST>
+						<SPRING_MAIL_PORT>587</SPRING_MAIL_PORT>
+						<SPRING_MAIL_USERNAME>nicolas291101@gmail.com</SPRING_MAIL_USERNAME>
+						<SPRING_MAIL_PASSWORD>nidq hvto caph sxkr</SPRING_MAIL_PASSWORD>
+						<SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH>true</SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH>
+						<SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE>true</SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE>
+
+
 					</environmentVariables>
 				</configuration>
+
+
 			</plugin>
 		</plugins>
 	</build>

@@ -6,6 +6,8 @@ import m1.info.reza.reservation.status.ReservationStatus;
 import m1.info.reza.restaurant.Restaurant;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 
 @Entity
@@ -86,6 +88,17 @@ public class Reservation {
 
     public void setReservationStatus(ReservationStatus reservationStatus) {
         this.reservationStatus = reservationStatus;
+    }
+
+    public String getFormattedFrenchDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE d MMMM", Locale.FRENCH);
+        String formatted = reservationDate.format(formatter);
+        return formatted.substring(0, 1).toUpperCase() + formatted.substring(1);
+    }
+
+    public String getFormattedFrenchTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH'h'mm");
+        return reservationDate.format(formatter);
     }
 }
 
