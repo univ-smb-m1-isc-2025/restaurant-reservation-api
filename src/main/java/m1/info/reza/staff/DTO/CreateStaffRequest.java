@@ -5,6 +5,9 @@ public class CreateStaffRequest {
     private String userEmail;
     private Long roleId;
 
+    public CreateStaffRequest() {
+    }
+
     public CreateStaffRequest(String userEmail, Long roleId) {
         this.userEmail = userEmail;
         this.roleId = roleId;

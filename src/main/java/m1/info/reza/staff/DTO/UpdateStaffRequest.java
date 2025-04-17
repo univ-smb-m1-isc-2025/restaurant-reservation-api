@@ -14,6 +14,9 @@ public class UpdateStaffRequest {
     @Positive(message = "Le roleId doit être un nombre positif.")
     private Long roleId;
 
+    public UpdateStaffRequest() {
+    }
+
     public UpdateStaffRequest(Long userId, Long roleId) {
         this.userId = userId;
         this.roleId = roleId;

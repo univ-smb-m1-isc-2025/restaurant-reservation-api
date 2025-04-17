@@ -42,7 +42,7 @@ public class RestaurantStaffController {
     }
 
     @GetMapping("/all")
-    private ResponseEntity<ApiResponse<List<RestaurantStaffDTO>>> index(@PathVariable Long restaurantId){
+    public ResponseEntity<ApiResponse<List<RestaurantStaffDTO>>> index(@PathVariable Long restaurantId){
         authenticatedUserService.checkAuthenticatedUserIsStaff(restaurantId);
 
         Restaurant restaurant = restaurantService.getRestaurant(restaurantId);
@@ -59,7 +59,7 @@ public class RestaurantStaffController {
     }
 
     @PostMapping("/create")
-    private ResponseEntity<ApiResponse<List<RestaurantStaffDTO>>> index(
+    public ResponseEntity<ApiResponse<List<RestaurantStaffDTO>>> index(
             @PathVariable Long restaurantId,
             @Valid @RequestBody CreateStaffRequest request
     ){
@@ -83,7 +83,7 @@ public class RestaurantStaffController {
     }
 
     @PutMapping("/update")
-    private ResponseEntity<ApiResponse<RestaurantStaffDTO>> update(
+    public ResponseEntity<ApiResponse<RestaurantStaffDTO>> update(
             @PathVariable Long restaurantId,
             @Valid @RequestBody UpdateStaffRequest request
     ){
