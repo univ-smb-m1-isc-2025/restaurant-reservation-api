@@ -24,6 +24,8 @@ public class Restaurant {
     @JsonManagedReference
     private List<RestaurantOpening> openings;
 
+    private Long subGroupId;
+
     public Restaurant() {
     }
 
@@ -100,5 +102,13 @@ public class Restaurant {
 
     public List<RestaurantOpening> getOpenings() {
         return openings;
+    }
+
+    public Long getSubGroupId() {
+        return subGroupId;
+    }
+
+    public void setSubGroupId(Long subGroupId) {
+        this.subGroupId = subGroupId;
     }
 }

@@ -39,7 +39,7 @@ public class MailService {
     }
 
     public void sendFeedbackReservation(Reservation reservation) {
-        String emailBody = MailTemplate.buildFeedbackRequestEmail(reservation, "www.feedback.com");
+        String emailBody = MailTemplate.buildFeedbackRequestEmail(reservation);
         sendEmail(reservation.getCustomer().getEmail(), "Comment s'est passé votre réservation ?", emailBody);
     }
 }

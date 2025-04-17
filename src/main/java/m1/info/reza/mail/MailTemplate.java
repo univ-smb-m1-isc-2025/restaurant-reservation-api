@@ -64,7 +64,10 @@ public class MailTemplate {
         );
     }
 
-    public static String buildFeedbackRequestEmail(Reservation reservation, String feedbackLink) {
+    public static String buildFeedbackRequestEmail(Reservation reservation) {
+
+        String feedbackLink = "https://www.user-feedback.oups.net/groups/" + reservation.getRestaurant().getSubGroupId();
+
         return """
         <html>
             <body style="font-family: Arial, sans-serif; line-height: 1.6;">
