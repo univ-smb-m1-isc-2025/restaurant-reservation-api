@@ -8,7 +8,7 @@ public class HelloController {
 
     @GetMapping("/")
     public String index() {
-        return "Bienvenue sur l'API REZA ! v1.1.0";
+        return "Bienvenue sur l'API REZA ! v1.2.0";
     }
 
 }
