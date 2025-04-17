@@ -20,7 +20,9 @@ public class MailTemplate {
                     <li><strong>Nombre de couverts :</strong> %d</li>
                 </ul>
                 <p>Nous avons hâte de vous accueillir !</p>
-                <p style="font-size: 0.9em; color: #888;">Si vous avez des questions, n'hésitez pas à nous contacter.</p>
+                <p style="font-size: 0.9em;">Si vous souhaitez annuler votre réservation, vous pouvez le faire en cliquant sur le lien suivant :</p>
+                <a href="https://www.reza.oups.net/reservation/annulation?reservation=%d" style="color: #348501; text-decoration: none;">Annuler ma réservation</a>
+                <p style="font-size: 0.9em; color: #888;">Si vous avez des questions, n'hésitez pas à nous contacter.</p>   
             </body>
         </html>
         """.formatted(
@@ -28,7 +30,8 @@ public class MailTemplate {
                 reservation.getRestaurant().getFullAddress(),
                 reservation.getFormattedFrenchDate(),
                 reservation.getFormattedFrenchTime(),
-                reservation.getNbGuests()
+                reservation.getNbGuests(),
+                reservation.getId()
         );
     }
 
@@ -46,7 +49,9 @@ public class MailTemplate {
                     <li><strong>Nombre de couverts :</strong> %d</li>
                 </ul>
                 <p>Nous avons hâte de vous accueillir !</p>
-                <p style="font-size: 0.9em; color: #888;">Si vous avez des questions ou des changements de dernière minute, n'hésitez pas à nous contacter.</p>
+                <p style="font-size: 0.9em;">Si vous souhaitez annuler votre réservation, vous pouvez le faire en cliquant sur le lien suivant :</p>
+                <a href="https://www.reza.oups.net/reservation/annulation?reservation=%d" style="color: #348501; text-decoration: none;">Annuler ma réservation</a>
+                <p style="font-size: 0.9em; color: #888;">Si vous avez des questions, n'hésitez pas à nous contacter.</p>
             </body>
         </html>
         """.formatted(
@@ -54,7 +59,8 @@ public class MailTemplate {
                 reservation.getRestaurant().getFullAddress(),
                 reservation.getFormattedFrenchDate(),
                 reservation.getFormattedFrenchTime(),
-                reservation.getNbGuests()
+                reservation.getNbGuests(),
+                reservation.getId()
         );
     }
 
