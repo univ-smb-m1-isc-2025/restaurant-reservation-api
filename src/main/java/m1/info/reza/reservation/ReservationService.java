@@ -92,6 +92,24 @@ public class ReservationService {
         return reservation.get();
     }
 
+    public List<Reservation> findPendingReservationsForTomorrow(){
+        LocalDate tomorrow = LocalDate.now().plusDays(1);
+
+        LocalDateTime startOfDay = tomorrow.atStartOfDay();
+        LocalDateTime endOfDay = tomorrow.atTime(LocalTime.MAX);
+
+        return reservationRepository.findByReservationDateBetweenAndReservationStatus(startOfDay, endOfDay, ReservationStatus.PENDING);
+    }
+
+    public List<Reservation> findCompletedReservationsFromYesterday(){
+        LocalDate yesterday = LocalDate.now().minusDays(1);
+
+        LocalDateTime startOfDay = yesterday.atStartOfDay();
+        LocalDateTime endOfDay = yesterday.atTime(LocalTime.MAX);
+
+        return reservationRepository.findByReservationDateBetweenAndReservationStatus(startOfDay, endOfDay, ReservationStatus.COMPLETED);
+    }
+
     private int getGuestCountAroundTime(Restaurant restaurant, LocalDateTime targetTime) {
         LocalDateTime start = targetTime.minusMinutes(90);
         LocalDateTime end = targetTime.plusMinutes(90);
