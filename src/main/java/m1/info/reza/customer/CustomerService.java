@@ -13,14 +13,14 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public Customer findOrCreate(String phone) {
-        Optional<Customer> customerOptional = customerRepository.findByPhone(phone);
+    public Customer findOrCreate(String email) {
+        Optional<Customer> customerOptional = customerRepository.findByEmail(email);
 
         if(customerOptional.isPresent()) {
             return customerOptional.get();
         }
 
-        Customer customer = new Customer(phone);
+        Customer customer = new Customer(email);
         customerRepository.save(customer);
 
         return customer;

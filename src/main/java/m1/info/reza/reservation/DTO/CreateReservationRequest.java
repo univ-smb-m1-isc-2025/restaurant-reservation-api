@@ -10,19 +10,16 @@ public class CreateReservationRequest {
     @Future(message = "La date de réservation doit être dans le futur")
     private LocalDateTime reservationDate;
 
-    @NotBlank(message = "Le numéro de téléphone du client est requis")
-    @Pattern(
-            regexp = "^0[1-9]\\d{8}$",
-            message = "Le numéro de téléphone doit être un numéro valide comme 0679554417"
-    )
-    private String customerPhone;
+    @NotBlank(message = "L'email du client est requis")
+    @Email(message = "Veuillez renseigner un e-mail valide.")
+    private String email;
 
     @Min(value = 1, message = "Il doit y avoir au moins 1 invité")
     private int nbGuests;
 
-    public CreateReservationRequest(LocalDateTime reservationDate, String customerPhone, int nbGuests) {
+    public CreateReservationRequest(LocalDateTime reservationDate, String email, int nbGuests) {
         this.reservationDate = reservationDate;
-        this.customerPhone = customerPhone;
+        this.email = email;
         this.nbGuests = nbGuests;
     }
 
@@ -34,12 +31,12 @@ public class CreateReservationRequest {
         this.reservationDate = reservationDate;
     }
 
-    public String getCustomerPhone() {
-        return customerPhone;
+    public String getCustomerEmail() {
+        return email;
     }
 
-    public void setCustomerPhone(String customerPhone) {
-        this.customerPhone = customerPhone;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public int getNbGuests() {

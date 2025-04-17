@@ -18,7 +18,7 @@ public class Customer {
     @GeneratedValue
     private Long id;
 
-    private String phone;
+    private String email;
 
     @CreationTimestamp
     private Date creationDate;
@@ -29,8 +29,8 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String phone) {
-        this.phone = phone;
+    public Customer(String email) {
+        this.email = email;
     }
 
     public void setId(Long id) {
@@ -41,12 +41,12 @@ public class Customer {
         return id;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Date getCreationDate() {

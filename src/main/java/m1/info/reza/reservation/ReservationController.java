@@ -40,7 +40,7 @@ public class ReservationController {
     @PostMapping("/create")
     public ResponseEntity<ApiResponse<Reservation>> create(@PathVariable Long restaurantId, @Valid @RequestBody CreateReservationRequest request){
         Restaurant restaurant = restaurantService.getRestaurant(restaurantId);
-        Customer customer = customerService.findOrCreate(request.getCustomerPhone());
+        Customer customer = customerService.findOrCreate(request.getCustomerEmail());
 
         Reservation reservation = reservationService.create(restaurant, customer, request.getReservationDate(), request.getNbGuests());
 
