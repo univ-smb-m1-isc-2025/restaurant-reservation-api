@@ -17,6 +17,9 @@ public class CreateReservationRequest {
     @Min(value = 1, message = "Il doit y avoir au moins 1 invité")
     private int nbGuests;
 
+    public CreateReservationRequest() {
+    }
+
     public CreateReservationRequest(LocalDateTime reservationDate, String email, int nbGuests) {
         this.reservationDate = reservationDate;
         this.email = email;

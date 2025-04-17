@@ -36,6 +36,16 @@ public class Restaurant {
         this.openings = new ArrayList<>();
     }
 
+    public Restaurant(Long id, String name, String address, String city, String zipcode, int capacity) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.city = city;
+        this.zipcode = zipcode;
+        this.capacity = capacity;
+        this.openings = new ArrayList<>();
+    }
+
     public Long getId() {
         return id;
     }

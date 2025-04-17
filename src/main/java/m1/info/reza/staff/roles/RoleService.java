@@ -35,14 +35,4 @@ public class RoleService {
         return roleRepository.findByRoleName("OWNER")
                 .orElseThrow(() -> new EntityNotFoundException("Le rôle 'OWNER' n'existe pas en base de données !"));
     }
-
-    public Role getManagerRole() {
-        return roleRepository.findByRoleName("MANAGER")
-                .orElseThrow(() -> new EntityNotFoundException("Le rôle 'MANAGER' n'existe pas en base de données !"));
-    }
-
-    public Role getEmployeeRole() {
-        return roleRepository.findByRoleName("EMPLOYEE")
-                .orElseThrow(() -> new EntityNotFoundException("Le rôle 'EMPLOYEE' n'existe pas en base de données !"));
-    }
 }

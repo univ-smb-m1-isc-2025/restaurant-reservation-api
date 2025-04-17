@@ -15,6 +15,12 @@ public class OpeningHoursRequest {
     @NotNull(message = "L'heure de fermeture ne peut pas être nulle")
     private LocalTime closingTime;
 
+    public OpeningHoursRequest(DayOfWeek day, LocalTime openingTime, LocalTime closingTime) {
+        this.day = day;
+        this.openingTime = openingTime;
+        this.closingTime = closingTime;
+    }
+
     public DayOfWeek getDay() {
         return day;
     }
