@@ -28,18 +28,18 @@ public class MailService {
         mailSender.send(messagePreparator);
     }
 
-    public void sendReservationConfirmation(String toEmail, Reservation reservation) {
+    public void sendReservationConfirmation(Reservation reservation) {
         String emailBody = MailTemplate.buildReservationReminderEmail(reservation);
-        sendEmail(toEmail, "Confirmation de votre réservation", emailBody);
+        sendEmail(reservation.getCustomer().getEmail(), "Confirmation de votre réservation", emailBody);
     }
 
-    public void sendReservationReminder(String toEmail, Reservation reservation) {
+    public void sendReservationReminder(Reservation reservation) {
         String emailBody = MailTemplate.buildReservationReminderEmail(reservation);
-        sendEmail(toEmail, "Rappel de votre réservation", emailBody);
+        sendEmail(reservation.getCustomer().getEmail(), "Rappel de votre réservation", emailBody);
     }
 
-    public void sendFeedbackReservation(String toEmail, Reservation reservation) {
+    public void sendFeedbackReservation(Reservation reservation) {
         String emailBody = MailTemplate.buildFeedbackRequestEmail(reservation, "www.feedback.com");
-        sendEmail(toEmail, "Comment s'est passé votre réservation ?", emailBody);
+        sendEmail(reservation.getCustomer().getEmail(), "Comment s'est passé votre réservation ?", emailBody);
     }
 }

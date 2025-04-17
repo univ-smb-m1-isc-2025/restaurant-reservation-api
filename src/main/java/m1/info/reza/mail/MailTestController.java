@@ -24,7 +24,7 @@ public class MailTestController {
     @GetMapping("/confirmation/{reservationId}")
     public ResponseEntity<String> sendReservationConfirmation(@PathVariable Long reservationId) {
         Reservation reservation = reservationService.getReservation(reservationId);
-        mailService.sendReservationConfirmation("nicolas291101@gmail.com", reservation);
+        mailService.sendReservationConfirmation(reservation);
 
         return ResponseEntity.ok("E-mail de confirmation envoyé pour la réservation ID: " + reservationId);
     }
@@ -32,7 +32,7 @@ public class MailTestController {
     @GetMapping("/reminder/{reservationId}")
     public ResponseEntity<String> sendReservationReminder(@PathVariable Long reservationId) {
         Reservation reservation = reservationService.getReservation(reservationId);
-        mailService.sendReservationReminder("nicolas291101@gmail.com", reservation);
+        mailService.sendReservationReminder(reservation);
 
         return ResponseEntity.ok("E-mail de rappel envoyé pour la réservation ID: " + reservationId);
     }
@@ -40,7 +40,7 @@ public class MailTestController {
     @GetMapping("/feedback/{reservationId}")
     public ResponseEntity<String> sendFeedbackRequest(@PathVariable Long reservationId) {
         Reservation reservation = reservationService.getReservation(reservationId);
-        mailService.sendFeedbackReservation("nicolas291101@gmail.com", reservation);
+        mailService.sendFeedbackReservation(reservation);
 
         return ResponseEntity.ok("E-mail de demande de feedback envoyé pour la réservation ID: " + reservationId);
     }
